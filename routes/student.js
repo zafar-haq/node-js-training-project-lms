@@ -10,4 +10,10 @@ router.use(TokenVerify.tokenVerify)
 
 router.post('/enroll', enrollMiddleware.checkAvailability, StudentController.enroll)
 
+router.get('/getClasses', StudentController.getClasses)
+
+router.post('/updateDetails', StudentController.updateDetails)
+
+router.get('/getCourseMaterial', StudentController.getCourseMaterial)
+
 module.exports = router
