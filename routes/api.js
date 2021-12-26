@@ -8,7 +8,6 @@ const instructor = require('./instructor')
 const courseMaterial = require('./courseMaterial')
 
 app.use(express.json())
-app.use(express.urlencoded({extended:true}))
 
 
 app.use('/admin', admin)

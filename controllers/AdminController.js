@@ -6,6 +6,7 @@ const ClassModel = require('../models').Class
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { ValidationError } = require('sequelize');
+const { validationResult } = require('express-validator');
 
 
 module.exports.login = async function (req, res) {
@@ -31,6 +32,13 @@ module.exports.login = async function (req, res) {
 }
 
 module.exports.createRole = async function (req, res) {
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(400).json({ errors: errors.array() })
+        return
+    }
+
     let response = { error: 'role not found.' }
     let status_code = 400
     try {
@@ -54,7 +62,7 @@ module.exports.createRole = async function (req, res) {
 
     } catch (e) {
         if (e instanceof ValidationError) {
-            response = { error:e.errors[0].message}
+            response = { error: e.errors[0].message }
             status_code = 400
         } else {
             response = { error: e.message }
@@ -66,6 +74,13 @@ module.exports.createRole = async function (req, res) {
 
 
 module.exports.createClass = async function (req, res) {
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(400).json({ errors: errors.array() })
+        return
+    }
+
     let response = {}
     let status_code = 200
 
@@ -78,7 +93,7 @@ module.exports.createClass = async function (req, res) {
         status_code = 201
     } catch (e) {
         if (e instanceof ValidationError) {
-            response = { error:e.errors[0].message}
+            response = { error: e.errors[0].message }
             status_code = 400
         } else {
             response = { error: e.message }
@@ -97,7 +112,7 @@ module.exports.assignInstructor = async function (req, res) {
         req.instructorObj.setClass(req.classObj)
     } catch (e) {
         if (e instanceof ValidationError) {
-            response = { error:e.errors[0].message}
+            response = { error: e.errors[0].message }
             status_code = 400
         } else {
             response = { error: e.message }
