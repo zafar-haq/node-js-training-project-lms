@@ -5,6 +5,17 @@ const AssignInstructorMiddleware = require('../middlewares/AssignInstructorMiddl
 const AdminController = require('../controllers/AdminController')
 const { body } = require('express-validator')
 
+/**
+ * @api {post} /admin/login request session login
+ * @apiName adminLogin
+ * @apiGroup Admin
+ *
+ * @apiBody {Email} {String} admins's unique email.
+ *
+ * @apiSuccess {String} success Success message.
+ * @apiSuccess {String} token  Token for the Admin.
+ */
+
 router.post('/login', AdminController.login)
 
 router.use(TokenVerify.tokenVerify) //middleware
