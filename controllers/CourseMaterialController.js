@@ -1,10 +1,10 @@
 'use strict'
-
 const path = require('path')
 const multer = require('multer')
+
 const CourseMaterialModel = require('../models').CourseMaterial
 
-module.exports.create = async function (req, res) {
+const create = async function (req, res) {
     let response = {message:'course material added.'}
     let status_code = 200
     try {
@@ -30,9 +30,12 @@ const storage = multer.diskStorage({
     }
 })
 
-module.exports.upload = multer({
+const upload = multer({
     storage: storage,
     limits: { fileSize: '50000000' }
 }).single('file')
 
 
+module.exports = {
+    create, upload
+}

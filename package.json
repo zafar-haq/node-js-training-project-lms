@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docs": "apidoc -i controllers/ -o apidoc/"
+    "docs": "apidoc -i ./routes -o ./apidoc/"
   },
   "repository": {
     "type": "git",
